@@ -30,16 +30,18 @@ This Spring Boot application manages a simple student-subject relationship. It a
    cd student-project
 2. **Build the Project**
    Use Maven to build the project and resolve dependencies.
+    ```bash
     mvn clean install
- 3. **Run the Application**
+ 4. **Run the Application**
     Start the application using Maven.
+     ```bash
     mvn spring-boot:run
 Alternatively, you can run the application from the generated JAR file.
 java -jar target/student-project-0.0.1-SNAPSHOT.jar
 3. **Access the API**
    The application runs on http://localhost:8080 by default.
 
-Student Endpoints
+**Student Endpoints**
 
 POST /student/save - Create or update a student record.
 GET /student/getall - Retrieve a list of all students.
@@ -49,7 +51,7 @@ Subject Endpoints
 POST /subject/save - Create or update a subject record.
 GET /subject/getall - Retrieve a list of all subjects.
 
-Database Configuration
+**Database Configuration**
 By default, the application uses an in-memory H2 database. You can configure another database by modifying application.properties or application.yml in the src/main/resources directory.
 
 Example configuration for an H2 database:
@@ -59,5 +61,5 @@ spring.datasource.username=sa
 spring.datasource.password=password
 spring.jpa.database-platform=org.hibernate.dialect.H2Dialect
 
-Security
+**Security**
 The security configuration has not been implemented yet. The application is currently accessible without authentication. Plans to add security features (such as Spring Security) are in progress.
