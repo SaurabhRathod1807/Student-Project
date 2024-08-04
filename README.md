@@ -9,12 +9,14 @@ This Spring Boot application manages a simple student-subject relationship. It a
 - **Student Management**: Create, read.
 - **Subject Management**: Create, read.
 - **Many-to-Many Relationship**: Manage the relationship between students and subjects.
-
+- **Security**: Basic authentication with roles for Admin and User.
+- 
 ## Technologies Used
 
 - Spring Boot
 - Spring Data JPA
 - H2 Database (or any other JPA-compatible database)
+- Spring Security
 
 ## Prerequisites
 
@@ -46,6 +48,7 @@ Alternatively, you can run the application from the generated JAR file.
 ## Student Endpoints
 
 POST /student/save - Create or update a student record.
+
 GET /student/getall - Retrieve a list of all students.
 
 Subject Endpoints
@@ -64,4 +67,24 @@ Example configuration for an H2 database:
 - spring.jpa.database-platform=org.hibernate.dialect.H2Dialect
 
 ## Security
-The security configuration has not been implemented yet. The application is currently accessible without authentication. Plans to add security features (such as Spring Security) are in progress.
+- The application uses Spring Security for basic authentication. There are two roles configured:
+
+- ADMIN: Can access all endpoints.
+- USER: Can only access /student/save.
+- Default Users
+  
+ **Admin User:**
+
+- Username: admin
+- Password: adminpass
+- Roles: ADMIN
+- curl -u admin:adminpass http://localhost:8080/student/getall
+
+
+**Regular User:**
+
+- Username: user
+- Password: userpass
+- Roles: USER
+- curl -u user:userpass -X POST -H "Content-Type: application/json" -H "X-CSRF-TOKEN: csrfToken" -d '{"name": "John Doe", "address": "123 Main St", "subjects": []}' http://localhost:8080/student/save
+
